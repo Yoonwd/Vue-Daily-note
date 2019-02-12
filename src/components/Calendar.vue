@@ -1,21 +1,42 @@
 <template>
   <div class="calendar">
-    <div class="calendar-inner">
-      <h1>Calendar</h1>
-      <router-link class="button" :to="todayUrl"> START </router-link>
-    </div>
+    <full-calendar
+      :config="config"
+      @day-click="dayClick"
+    >
+
+    </full-calendar>
   </div>
 </template>
 
 <script>
-import moment from "moment";
+import { FullCalendar } from "vue-full-calendar";
+import 'fullcalendar/dist/fullcalendar.css';
 
 export default {
   name: "Calendar",
-  methods: {},
+  components: {
+    FullCalendar
+  },
+  methods: {
+    dayClick(date) {
+      let url = `/day/${date.format('YYYY-MM-DD')}`;
+      this.$router.push(url);
+    }
+  },
   computed: {},
   data() {
-    return {};
+    return {
+      config: {
+        defaultView: 'month',
+        header: {
+          left: 'prev',
+          center: 'title',
+          right: 'next'
+        },
+        height: 500
+      }
+    };
   },
   props: {}
 };
