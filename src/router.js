@@ -1,25 +1,42 @@
-import Vue from 'vue'
-import Router from 'vue-router'
-import Home from './views/Home.vue'
+import Vue from "vue";
+import Router from "vue-router";
 
-Vue.use(Router)
+import Intro from "@/components/Intro";
+import Day from "@/components/Day";
+import Calendar from "@/components/Calendar";
+import Setting from "@/components/Setting";
+import About from "@/components/About";
+
+Vue.use(Router);
 
 export default new Router({
-  mode: 'history',
-  base: process.env.BASE_URL,
+  mode: "history",
+
   routes: [
     {
-      path: '/',
-      name: 'home',
-      component: Home
+      path: "/",
+      name: "intro",
+      component: Intro
     },
     {
-      path: '/about',
-      name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "about" */ './views/About.vue')
+      path: "/day/:date",
+      name: "day",
+      component: Day
+    },
+    {
+      path: "/calendar",
+      name: "calendar",
+      component: Calendar
+    },
+    {
+      path: "/setting",
+      name: "setting",
+      component: Setting
+    },
+    {
+      path: "/about",
+      name: "about",
+      component: About
     }
   ]
-})
+});
