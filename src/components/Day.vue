@@ -52,6 +52,7 @@
 import DayScore from "./DayScore";
 import axios from 'axios';
 import moment from 'moment';
+import { mapGetters } from 'vuex';
 
 export default {
   name: "Day",
@@ -69,7 +70,7 @@ export default {
     displayItems(result) {
 
       let items = [];
-      let startTime = '08:00';
+      let startTime = this.savedSettings.starttime;
 
       for (let i = 0; i < 12; i++) {
         let datetime = moment(this.$route.params.date + ' ' + startTime);
@@ -105,7 +106,9 @@ export default {
       item.open = !item.open;
     }
   },
-  computed: {},
+  computed: {
+    ...mapGetters(['savedSettings'])
+  },
   components: {
     DayScore
   },

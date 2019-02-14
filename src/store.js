@@ -5,12 +5,25 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-
+    settings: {
+      starttime: undefined,
+      lang: undefined
+    }
   },
-  mutations: {
+  getters: {
+    savedSettings: (state) => {
+      return state.settings;
+    }
+  },
 
+  mutations: {
+    saveSettings: (state, payLoad) => {
+      state.settings = payLoad;
+    }
   },
   actions: {
-
+    saveSettings: ( {commit}, payLoad) => {
+      commit('saveSettings', payLoad);
+    }
   }
 })

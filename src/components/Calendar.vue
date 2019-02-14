@@ -12,6 +12,7 @@
 <script>
 import { FullCalendar } from "vue-full-calendar";
 import 'fullcalendar/dist/fullcalendar.css';
+import { mapGetters } from 'vuex';
 
 export default {
   name: "Calendar",
@@ -22,9 +23,14 @@ export default {
     dayClick(date) {
       let url = `/day/${date.format('YYYY-MM-DD')}`;
       this.$router.push(url);
+    },
+    applySettings() {
+      this.config['locale'] = this.savedSettings.lang;
     }
   },
-  computed: {},
+  computed: {
+    ...mapGetters(['savedSettings'])
+  },
   data() {
     return {
       config: {
@@ -34,10 +40,13 @@ export default {
           center: 'title',
           right: 'next'
         },
-        height: 500
+        height: 500,
+        locale: 'ko'
       }
     };
   },
-  props: {}
+  created() {
+    this.applySettings();
+  }
 };
 </script>
